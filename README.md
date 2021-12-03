@@ -1,43 +1,46 @@
-# go-template
-Napptive golang template
+# mock-extensions
+mock-extensions is a library that includes extensions to be used in the mockups
 
-The purpose of this project is to provide a common template to develop Golang microservices in Napptive.
+- `StructMatcher` implements Matcher interface.
 
-## Layout structure
-
-The layout structure is based on the default golang-template layout.
-
-https://github.com/golang-standards/project-layout
-
-## Usage
-
-A make file is provided with the following targets:
-
-* clean: Remove build files
-* test: Run the available tests
-* build: Build the files for your local environment
-* build-darwin: Build the files for MacOS
-* build-linux: Build the files for Linux
-* k8s: Generate the Kubernetes deployment files
-* docker-prep: Prepare the Dockerfile folder with all the extra files
-* docker-build: Build the Dockerfile locally
-* docker-push: Push the image to the selected repository. You must make login before to push the docker image.
-
----
-**Important**
-
-If you are developing with MacOS/Darwin, you must install gnu-sed.
-
+## How to use
+1. Create a StructMatcher as
 ```
-brew install gnu-sed
+matcher := NewStructMatcher(map[string]interface{}{"<field_name>": <field_value>...})
 ```
----
+-`field_name` should be field name in the struct, proto annotation or json annotation. For example, if you have a struct defined as following:
+```
+type Object struct {
+	Field1    string `protobuf:"bytes,1,opt,name=field_proto1,proto3" json:"field_1,omitempty"`
+	Field2    int    `protobuf:"bytes,1,opt,name=field_proto2,proto3" json:"field_2,omitempty"`
+	...
+	Fieldn    string `protobuf:"bytes,1,opt,name=field_proton,proto3" json:"field_n,omitempty"`
+}
+```
+you could use different matches:
+
+1. With the field names
+```
+matcher := NewStructMatcher(map[string]interface{}{"Field1": <field_value>, "Field2": <field_value>})
+```
+2. With proto annotations
+```
+matcher := NewStructMatcher(map[string]interface{}{"field_proto1": <field_value>, "field_proto2": <field_value>})
+```
+3. With json annotations
+```
+matcher := NewStructMatcher(map[string]interface{}{"field_1": <field_value>, "field_2": <field_value>})
+```
+4. Or combining the field names
+```
+matcher := NewStructMatcher(map[string]interface{}{"Field1": <field_value>, "field_2": <field_value>})
+```
 
 ## Integration with Github Actions
 
 This template is integrated with GitHub Actions.
 
-![Check changes in the Main branch](https://github.com/napptive/go-template/workflows/Check%20changes%20in%20the%20Main%20branch/badge.svg)
+![Check changes in the Main branch](https://github.com/napptive/mock-extensions/workflows/Check%20changes%20in%20the%20Main%20branch/badge.svg)
 
 ## License
 
