@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Napptive
+ * Copyright 2021 Napptive
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package config
+package matcher
 
 import (
-	"testing"
-
 	"github.com/onsi/ginkgo"
 	"github.com/onsi/gomega"
+	"testing"
 )
 
-func TestConfigPackage(t *testing.T) {
+func TestMatcher(t *testing.T) {
 	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "Config package suite")
+	ginkgo.RunSpecs(t, "Matcher Suite")
 }
-
