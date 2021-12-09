@@ -22,7 +22,7 @@ import (
 	"reflect"
 )
 
-var _ = ginkgo.Describe("Handler test on matcher calls", func() {
+var _ = ginkgo.Describe("Testing struct matcher", func() {
 	ginkgo.Context("Checking Matches with a Full Example", func() {
 		ginkgo.It("Matches using all types (field, proto and json)", func() {
 
